@@ -224,3 +224,133 @@ if (JSON.stringify(caseSensitiveTestExpectedOutput) === JSON.stringify(caseSensi
     console.log("Expected:", caseSensitiveTestExpectedOutput);
     console.log("Received:", caseSensitiveTestResult);
 }
+
+
+/*====================================================================================
+4.  Multiple Matches in a Single Book
+Testing for multiple occurrences of a searchTerm in one book.
+*/
+const multipleMatchesTestBooks = [
+    {
+        "Title": "Echoes of the Mountains",
+        "ISBN": "1234567890123",
+        "Content": [
+            {"Page": 32, "Line": 1, "Text": "The echo resounded through the valley."},
+            {"Page": 33, "Line": 2, "Text": "Each echo seemed to tell a different story."},
+            {"Page": 34, "Line": 3, "Text": "They listened to the echo of their footsteps."}
+        ]
+    }
+];
+
+const multipleMatchesTestExpectedOutput = {
+    "SearchTerm": "echo",
+    "Results": [
+        {"ISBN": "1234567890123", "Page": 32, "Line": 1},
+        {"ISBN": "1234567890123", "Page": 33, "Line": 2},
+        {"ISBN": "1234567890123", "Page": 34, "Line": 3}
+    ]
+};
+
+const multipleMatchesTestResult = findSearchTermInBooks("echo", multipleMatchesTestBooks);
+if (JSON.stringify(multipleMatchesTestExpectedOutput) === JSON.stringify(multipleMatchesTestResult)) {
+    console.log("PASS: Multiple Matches in a Single Book");
+} else {
+    console.log("FAIL: Multiple Matches in a Single Book");
+    console.log("Expected:", multipleMatchesTestExpectedOutput);
+    console.log("Received:", multipleMatchesTestResult);
+}
+
+
+
+/*====================================================================================
+5.  Matches Across Multiple Books
+Testing for multiple occurrences of a searchTerm in different books.
+*/
+const crossBookTestBooks = [
+    {
+        "Title": "The Sun and The Moon",
+        "ISBN": "1122334455667",
+        "Content": [{"Page": 22, "Line": 1, "Text": "The Sun is a star at the center of our solar system."}]
+    },
+    {
+        "Title": "Stars and Planets",
+        "ISBN": "2233445566778",
+        "Content": [{"Page": 18, "Line": 2, "Text": "Planets orbit stars in the vastness of space."}]
+    }
+];
+
+const crossBookTestExpectedOutput = {
+    "SearchTerm": "stars",
+    "Results": [
+        {"ISBN": "2233445566778", "Page": 18, "Line": 2}
+    ]
+};
+
+const crossBookTestResult = findSearchTermInBooks("stars", crossBookTestBooks);
+if (JSON.stringify(crossBookTestExpectedOutput) === JSON.stringify(crossBookTestResult)) {
+    console.log("PASS: Matches Across Multiple Books");
+} else {
+    console.log("FAIL: Matches Across Multiple Books");
+    console.log("Expected:", crossBookTestExpectedOutput);
+    console.log("Received:", crossBookTestResult);
+}
+
+
+
+/*====================================================================================
+6.  Empty Content Array
+Testing how the function handles a book with no content.
+*/
+const emptyContentTestBooks = [
+    {
+        "Title": "The Silent Forest",
+        "ISBN": "3344556677889",
+        "Content": []
+    }
+];
+
+const emptyContentTestExpectedOutput = {
+    "SearchTerm": "silent",
+    "Results": []
+};
+
+const emptyContentTestResult = findSearchTermInBooks("silent", emptyContentTestBooks);
+if (JSON.stringify(emptyContentTestExpectedOutput) === JSON.stringify(emptyContentTestResult)) {
+    console.log("PASS: Empty Content Array");
+} else {
+    console.log("FAIL: Empty Content Array");
+    console.log("Expected:", emptyContentTestExpectedOutput);
+    console.log("Received:", emptyContentTestResult);
+}
+
+
+/*====================================================================================
+7.  Special Characters in Search Term
+Testing for terms that contain special characters.
+*/
+const specialCharTestBooks = [
+    {
+        "Title": "Questions & Answers",
+        "ISBN": "4455667788990",
+        "Content": [
+            {"Page": 5, "Line": 1, "Text": "What is the meaning of life, the universe, & everything?"}
+        ]
+    }
+];
+
+const specialCharTestExpectedOutput = {
+    "SearchTerm": "&",
+    "Results": [
+        {"ISBN": "4455667788990", "Page": 5, "Line": 1}
+    ]
+};
+
+const specialCharTestResult = findSearchTermInBooks("&", specialCharTestBooks);
+if (JSON.stringify(specialCharTestExpectedOutput) === JSON.stringify(specialCharTestResult)) {
+    console.log("PASS: Special Characters in Search Term");
+} else {
+    console.log("FAIL: Special Characters in Search Term");
+    console.log("Expected:", specialCharTestExpectedOutput);
+    console.log("Received:", specialCharTestResult);
+}
+
