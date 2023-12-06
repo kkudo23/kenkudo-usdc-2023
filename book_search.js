@@ -22,11 +22,33 @@
     /** You will need to implement your search and 
      * return the appropriate object here. */
 
+    // Initialize the result object with an empty string for SearchTerm
+    // and an empty array for Results
     var result = {
         "SearchTerm": "",
         "Results": []
     };
-    
+   
+    // Iterate over each book in the scannedTextObj array
+    scannedTextObj.forEach(book => {
+      // Iterate over the content of each book
+      book.Content.forEach(content => {
+        // Check if the 'Text' field of the content includes the searchTerm
+        if (content.Text.includes(searchTerm)) {
+          // If the searchTerm is found, push an object containing the ISBN,
+          // page, and line number to the Results array in the result object
+          result.Results.push({
+            "ISBN": book.ISBN,
+            "Page": content.Page,
+            "Line": content.Line
+          });
+        }
+      }
+      );
+    }
+    );
+
+   // Return the result object after completing the search
     return result; 
 }
 
