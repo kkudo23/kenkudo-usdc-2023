@@ -204,7 +204,7 @@ const caseSensitiveTestBooks = [
         "ISBN": "9780005556666",
         "Content": [
             {"Page": 5, "Line": 4, "Text": "The Martian vessels landed in the night."},
-            {"Page": 6, "Line": 1, "Text": "Their technology was far superior to ours."}
+            {"Page": 6, "Line": 1, "Text": "Their technology was the far superior to ours."}
         ]
     }
 ];
