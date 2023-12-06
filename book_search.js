@@ -34,7 +34,7 @@
       // Iterate over the content of each book
       book.Content.forEach(content => {
         // Check if the 'Text' field of the content includes the searchTerm
-        if (content.Text.includes(searchTerm)) {
+        /*if (content.Text.includes(searchTerm)) {
           // If the searchTerm is found, push an object containing the ISBN,
           // page, and line number to the Results array in the result object
           console.log("Match found in text:", content.Text);
@@ -42,10 +42,20 @@
             "ISBN": book.ISBN,
             "Page": content.Page,
             "Line": content.Line
-          });
-        }
-      });
-    });
+          })
+        }*/
+         // Using a regular expression to ensure whole word matching
+         // RegExp.test() is used to perform the case-sensitive search
+         const regex = new RegExp(`\\b${searchTerm}\\b`);
+         if (regex.test(content.Text)) {
+          result.Results.push({
+            "ISBN": book.ISBN,
+            "Page": content.Page,
+            "Line": content.Line
+          })
+         }
+      })
+    })
 
    // Return the result object after completing the search
     return result; 
