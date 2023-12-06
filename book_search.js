@@ -41,12 +41,10 @@
             "ISBN": book.ISBN,
             "Page": content.Page,
             "Line": content.Line
-          });
+          })
         }
-      }
-      );
-    }
-    );
+      })
+    })
 
    // Return the result object after completing the search
     return result; 
