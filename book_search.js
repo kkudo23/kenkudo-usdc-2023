@@ -122,3 +122,94 @@ if (test2result.Results.length == 1) {
     console.log("Expected:", twentyLeaguesOut.Results.length);
     console.log("Received:", test2result.Results.length);
 }
+
+
+/*====================================================================================
+1. Positive Test
+A test case to ensure the function correctly finds and returns matches.
+*/
+const positiveTestBooks = [
+    {
+        "Title": "Mysterious Island",
+        "ISBN": "9780001112222",
+        "Content": [
+            {"Page": 15, "Line": 5, "Text": "The island was lush and verdant."},
+            {"Page": 16, "Line": 3, "Text": "They found a mysterious cave on the north side."}
+        ]
+    }
+];
+
+const positiveTestExpectedOutput = {
+    "SearchTerm": "mysterious",
+    "Results": [
+        {"ISBN": "9780001112222", "Page": 16, "Line": 3}
+    ]
+};
+
+const positiveTestResult = findSearchTermInBooks("mysterious", positiveTestBooks);
+if (JSON.stringify(positiveTestExpectedOutput) === JSON.stringify(positiveTestResult)) {
+    console.log("PASS: Positive Test");
+} else {
+    console.log("FAIL: Positive Test");
+    console.log("Expected:", positiveTestExpectedOutput);
+    console.log("Received:", positiveTestResult);
+}
+
+
+
+/*====================================================================================
+2. Negative Test
+A test case to verify that no matches are returned when the search term is not present.
+*/
+const negativeTestBooks = [
+    {
+        "Title": "Journey to the Center of the Earth",
+        "ISBN": "9780003334444",
+        "Content": [
+            {"Page": 10, "Line": 2, "Text": "They prepared for their journey at dawn."},
+            {"Page": 11, "Line": 1, "Text": "The cave was dark and silent."}
+        ]
+    }
+];
+
+const negativeTestResult = findSearchTermInBooks("ocean", negativeTestBooks);
+if (negativeTestResult.Results.length === 0) {
+    console.log("PASS: Negative Test");
+} else {
+    console.log("FAIL: Negative Test");
+    console.log("Expected 0 results for 'ocean'");
+    console.log("Received:", negativeTestResult.Results.length, "results");
+}
+
+
+
+/*====================================================================================
+3. Case-sensitive Test
+A test case to ensure the function respects case sensitivity.
+*/
+const caseSensitiveTestBooks = [
+    {
+        "Title": "War of the Worlds",
+        "ISBN": "9780005556666",
+        "Content": [
+            {"Page": 5, "Line": 4, "Text": "The Martian vessels landed in the night."},
+            {"Page": 6, "Line": 1, "Text": "Their technology was far superior to ours."}
+        ]
+    }
+];
+
+const caseSensitiveTestExpectedOutput = {
+    "SearchTerm": "The",
+    "Results": [
+        {"ISBN": "9780005556666", "Page": 5, "Line": 4}
+    ]
+};
+
+const caseSensitiveTestResult = findSearchTermInBooks("The", caseSensitiveTestBooks);
+if (JSON.stringify(caseSensitiveTestExpectedOutput) === JSON.stringify(caseSensitiveTestResult)) {
+    console.log("PASS: Case-sensitive Test");
+} else {
+    console.log("FAIL: Case-sensitive Test");
+    console.log("Expected:", caseSensitiveTestExpectedOutput);
+    console.log("Received:", caseSensitiveTestResult);
+}
