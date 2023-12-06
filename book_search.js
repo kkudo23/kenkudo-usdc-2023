@@ -17,10 +17,11 @@
  * @param {string} searchTerm - The word or term we're searching for. 
  * @param {JSON} scannedTextObj - A JSON object representing the scanned text.
  * @returns {JSON} - Search results.
- * */ 
+ * */
+/*
  function findSearchTermInBooks(searchTerm, scannedTextObj) {
-    /** You will need to implement your search and 
-     * return the appropriate object here. */
+     * You will need to implement your search and 
+     * return the appropriate object here.
 
     // Initialize the result object with SearchTerm
     // and an empty array for Results
@@ -34,7 +35,7 @@
       // Iterate over the content of each book
       book.Content.forEach(content => {
         // Check if the 'Text' field of the content includes the searchTerm
-        /*if (content.Text.includes(searchTerm)) {
+        if (content.Text.includes(searchTerm)) {
           // If the searchTerm is found, push an object containing the ISBN,
           // page, and line number to the Results array in the result object
           console.log("Match found in text:", content.Text);
@@ -43,7 +44,7 @@
             "Page": content.Page,
             "Line": content.Line
           })
-        }*/
+        }
          // Using a regular expression to ensure whole word matching
          // RegExp.test() is used to perform the case-sensitive search
          const regex = new RegExp(`\\b${searchTerm}\\b`);
@@ -53,13 +54,61 @@
             "Page": content.Page,
             "Line": content.Line
           })
-         }
+         }        
+       }
       })
     })
-
    // Return the result object after completing the search
     return result; 
 }
+*/
+
+function findSearchTermInBooks(searchTerm, scannedTextObj) {
+    /* * You will need to implement your search and 
+     * return the appropriate object here.*/
+
+   // Initialize the result object with SearchTerm
+   // and an empty array for Results
+    var result = {
+        "SearchTerm": searchTerm,
+        "Results": []
+    };
+
+    // Iterate over each book in the scannedTextObj array
+    scannedTextObj.forEach(book => {
+        // Iterate over the content of each book
+        book.Content.forEach(content => {
+            /*It first checks if the searchTerm consists only of alphanumeric characters (and underscore) using a regular
+            expression (/^[a-zA-Z0-9_]+$/). If so, it uses the original regular expression with word boundaries.*/
+            if (/^[a-zA-Z0-9_]+$/.test(searchTerm)) {
+                 // Using a regular expression to ensure whole word matching
+                // RegExp.test() is used to perform the case-sensitive search
+                const regex = new RegExp(`\\b${searchTerm}\\b`);
+                /* If the searchTerm is found, push an object containing the ISBN,
+                page, and line number to the Results array in the result object */
+                if (regex.test(content.Text)) {
+                    result.Results.push({
+                        "ISBN": book.ISBN,
+                        "Page": content.Page,
+                        "Line": content.Line
+                    });
+                }
+            } else {
+                // Use includes() for search terms with special characters
+                if (content.Text.includes(searchTerm)) {
+                    result.Results.push({
+                        "ISBN": book.ISBN,
+                        "Page": content.Page,
+                        "Line": content.Line
+                    });
+                }
+            }
+        });
+    });
+
+    return result; 
+}
+
 
 /** Example input object. */
 const twentyLeaguesIn = [
