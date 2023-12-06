@@ -37,6 +37,7 @@
         if (content.Text.includes(searchTerm)) {
           // If the searchTerm is found, push an object containing the ISBN,
           // page, and line number to the Results array in the result object
+          console.log("Match found in text:", content.Text);
           result.Results.push({
             "ISBN": book.ISBN,
             "Page": content.Page,
