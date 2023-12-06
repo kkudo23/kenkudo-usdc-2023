@@ -25,7 +25,7 @@
     // Initialize the result object with SearchTerm
     // and an empty array for Results
     var result = {
-        "SearchTerm": SearchTerm,
+        "SearchTerm": searchTerm,
         "Results": []
     };
    
