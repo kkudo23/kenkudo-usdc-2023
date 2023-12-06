@@ -22,10 +22,10 @@
     /** You will need to implement your search and 
      * return the appropriate object here. */
 
-    // Initialize the result object with an empty string for SearchTerm
+    // Initialize the result object with SearchTerm
     // and an empty array for Results
     var result = {
-        "SearchTerm": "",
+        "SearchTerm": SearchTerm,
         "Results": []
     };
    
